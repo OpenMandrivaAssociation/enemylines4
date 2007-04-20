@@ -1,6 +1,6 @@
 %define	name	enemylines4
 %define	version 1.0
-%define rel	2
+%define rel	3
 %define	release	%mkrel %rel
 
 Name:		%{name} 
