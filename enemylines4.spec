@@ -11,6 +11,7 @@ Source0:	%{name}-%{version}.tar.bz2
 Source10:	%{name}.png
 URL:		http://raum1.memebot.com/enemylines/enemylines4.html
 Group:		Games/Arcade
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 License:	GPL
 BuildRequires:	SDL_image1.2-devel SDL-devel libMesaglut-devel
 BuildRequires:  ImageMagick
