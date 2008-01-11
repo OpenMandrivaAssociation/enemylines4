@@ -37,13 +37,14 @@ mkdir -p %{buildroot}/%{_iconsdir}/ %{buildroot}/%{_miconsdir}/ $RPM_BUILD_ROOT%
 install -m644 %SOURCE10 -D %{buildroot}/%{_liconsdir}/%{name}.png
 convert %{buildroot}/%{_liconsdir}/%{name}.png -resize 24x24 %{buildroot}/%{_iconsdir}/%{name}.png
 convert %{buildroot}/%{_liconsdir}/%{name}.png -resize 16x16 %{buildroot}/%{_miconsdir}/%{name}.png
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}):command="%{_gamesbindir}/%{name}" \
-                  icon=%{name}.png \
-                  needs="x11" \
-                  section="More Applications/Games/Arcade" \
-                  title="Enemy lines 4"\
-                  longtitle="A simple futuristic racing game. Urgent deliveries!"
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+[Desktop Entry]
+Type=Application
+Exec=%{_gamesbindir}/%{name}
+Icon=%{name}
+Categories=Game;ArcadeGame;
+Name=Enemy lines 4
+Comment=A simple futuristic racing game. Urgent deliveries!
 EOF
 
 %post
@@ -61,4 +62,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/*
 %{_gamesbindir}/%{name}
 %{_iconsdir}/*
-%{_menudir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
