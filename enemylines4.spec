@@ -1,20 +1,17 @@
-%define	name	enemylines4
-%define	version 1.0
-%define rel	3
-%define	release	%mkrel %rel
-
-Name:		%{name} 
+Name:		enemylines4
 Summary:	A simple futuristic racing game
-Version:	%{version} 
-Release:	%{release} 
-Source0:	%{name}-%{version}.tar.bz2
+Version:	1.0
+Release:	%mkrel 4
+Source0:	http://proj.phk.at/el/4/%{name}-%{version}.tar.bz2
 Source10:	%{name}.png
-URL:		http://raum1.memebot.com/enemylines/enemylines4.html
+# include assert.h in track.cc to fix build failure - AdamW 2008/02
+Patch0:		enemylines4-assert.patch
+URL:		http://proj.phk.at/el/4/
 Group:		Games/Arcade
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-License:	GPL
-BuildRequires:	SDL_image1.2-devel SDL-devel mesaglut-devel
-BuildRequires:  ImageMagick
+License:	GPL+
+BuildRequires:	SDL_image-devel SDL-devel mesaglut-devel
+BuildRequires:  imagemagick
 
 %description
 A simple futuristic racing game. Urgent deliveries - Reach goal before
@@ -24,42 +21,48 @@ have been offline for months.
 
 %prep
 %setup -q
+%patch0 -p1 -b .assert
 
 %build
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/
-cp ./data/* $RPM_BUILD_ROOT%{_datadir}/%{name}/
-install -m755 %{name} -D $RPM_BUILD_ROOT%{_gamesbindir}/%{name}
-mkdir -p %{buildroot}/%{_iconsdir}/ %{buildroot}/%{_miconsdir}/ $RPM_BUILD_ROOT%{_menudir}/
-install -m644 %SOURCE10 -D %{buildroot}/%{_liconsdir}/%{name}.png
-convert %{buildroot}/%{_liconsdir}/%{name}.png -resize 24x24 %{buildroot}/%{_iconsdir}/%{name}.png
-convert %{buildroot}/%{_liconsdir}/%{name}.png -resize 16x16 %{buildroot}/%{_miconsdir}/%{name}.png
-cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+rm -rf %{buildroot}
+mkdir -p %{buildroot}%{_datadir}/%{name}/
+cp ./data/* %{buildroot}%{_datadir}/%{name}/
+install -m755 %{name} -D %{buildroot}%{_gamesbindir}/%{name}
+
+mkdir -p %{buildroot}/%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+install -m644 %{SOURCE10} %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+convert -scale 32x32 %{SOURCE10} %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert -scale 16x16 %{SOURCE10} %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+
+mkdir -p %{buildroot}%{_datadir}/applications
+cat << EOF > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Type=Application
 Exec=%{_gamesbindir}/%{name}
 Icon=%{name}
 Categories=Game;ArcadeGame;
-Name=Enemy lines 4
-Comment=A simple futuristic racing game. Urgent deliveries!
+Name=Enemy Lines 4
+Comment=A simple futuristic racing game
 EOF
 
 %post
 %{update_menus}
+%{update_icon_cache}
 
 %postun
 %{clean_menus}
+%{clean_icon_cache}
 
 %clean 
-rm -rf $RPM_BUILD_ROOT 
+rm -rf %{buildroot} 
 
 %files 
 %defattr(-,root,root)
 %doc README
-%{_datadir}/%{name}/*
+%{_datadir}/%{name}
 %{_gamesbindir}/%{name}
-%{_iconsdir}/*
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
