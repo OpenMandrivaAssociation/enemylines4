@@ -49,11 +49,15 @@ Comment=A simple futuristic racing game
 EOF
 
 %post
+%if %mdkversion < 200900
 %{update_menus}
+%endif
 %{update_icon_cache}
 
 %postun
+%if %mdkversion < 200900
 %{clean_menus}
+%endif
 %{clean_icon_cache}
 
 %clean 
