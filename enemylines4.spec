@@ -1,7 +1,7 @@
 Name:		enemylines4
 Summary:	A simple futuristic racing game
 Version:	1.0
-Release:	%mkrel 6
+Release:	%mkrel 7
 Source0:	http://proj.phk.at/el/4/%{name}-%{version}.tar.bz2
 Source10:	%{name}.png
 # include assert.h in track.cc to fix build failure - AdamW 2008/02
