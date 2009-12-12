@@ -1,11 +1,12 @@
 Name:		enemylines4
 Summary:	A simple futuristic racing game
 Version:	1.0
-Release:	%mkrel 7
+Release:	%mkrel 8
 Source0:	http://proj.phk.at/el/4/%{name}-%{version}.tar.bz2
 Source10:	%{name}.png
 # include assert.h in track.cc to fix build failure - AdamW 2008/02
 Patch0:		enemylines4-assert.patch
+Patch1:		enemylines4-1.0-mdv-fix-gcc-4.3.patch
 URL:		http://proj.phk.at/el/4/
 Group:		Games/Arcade
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -22,6 +23,7 @@ have been offline for months.
 %prep
 %setup -q
 %patch0 -p1 -b .assert
+%patch1 -p1 -b .gcc43
 
 %build
 %make
