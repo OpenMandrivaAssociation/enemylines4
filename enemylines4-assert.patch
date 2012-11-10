@@ -1,0 +1,10 @@
+--- enemylines4-1.0/track.cc	2005-12-14 01:58:00.000000000 -0800
++++ enemylines4-1.0/track.cc.new	2008-02-15 00:58:15.000000000 -0800
+@@ -2,6 +2,7 @@
+ 
+ #include "track.h"
+ #include "random.h"
++#include "assert.h"
+ 
+ namespace el4 {
+ 

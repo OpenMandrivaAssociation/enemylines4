@@ -1,0 +1,30 @@
+diff -p -up enemylines4-1.0/c3_tpl.h.gcc43 enemylines4-1.0/c3_tpl.h
+--- enemylines4-1.0/c3_tpl.h.gcc43	2005-12-14 10:58:00.000000000 +0100
++++ enemylines4-1.0/c3_tpl.h	2009-12-12 22:31:05.000000000 +0100
+@@ -1,3 +1,4 @@
++#include <limits>
+ #include <iostream>
+ #include <sstream>
+ #include <utility>
+diff -p -up enemylines4-1.0/random.cc.gcc43 enemylines4-1.0/random.cc
+--- enemylines4-1.0/random.cc.gcc43	2005-12-14 10:58:00.000000000 +0100
++++ enemylines4-1.0/random.cc	2009-12-12 22:31:05.000000000 +0100
+@@ -1,5 +1,6 @@
+ #include "random.h"
+ 
++#include <cstdlib>
+ #include <iostream>
+ 
+ 
+diff -p -up enemylines4-1.0/track.cc.gcc43 enemylines4-1.0/track.cc
+--- enemylines4-1.0/track.cc.gcc43	2009-12-12 22:31:05.000000000 +0100
++++ enemylines4-1.0/track.cc	2009-12-12 22:45:50.000000000 +0100
+@@ -4,6 +4,8 @@
+ #include "random.h"
+ #include "assert.h"
+ 
++#include <cstdlib>
++
+ namespace el4 {
+ 
+ 
