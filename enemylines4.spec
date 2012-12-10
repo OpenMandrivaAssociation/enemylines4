@@ -1,18 +1,19 @@
 Name:		enemylines4
 Summary:	A simple futuristic racing game
 Version:	1.0
-Release:	%mkrel 9
+Release:	10
+Group:		Games/Arcade
+License:	GPL+
+URL:		http://proj.phk.at/el/4/
 Source0:	http://proj.phk.at/el/4/%{name}-%{version}.tar.bz2
 Source10:	%{name}.png
 # include assert.h in track.cc to fix build failure - AdamW 2008/02
 Patch0:		enemylines4-assert.patch
 Patch1:		enemylines4-1.0-mdv-fix-gcc-4.3.patch
-URL:		http://proj.phk.at/el/4/
-Group:		Games/Arcade
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-License:	GPL+
-BuildRequires:	SDL_image-devel SDL-devel mesaglut-devel
-BuildRequires:  imagemagick
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(SDL_image)
+BuildRequires:	pkgconfig(glut)
+BuildRequires:	imagemagick
 
 %description
 A simple futuristic racing game. Urgent deliveries - Reach goal before
@@ -29,7 +30,6 @@ have been offline for months.
 %make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_datadir}/%{name}/
 cp ./data/* %{buildroot}%{_datadir}/%{name}/
 install -m755 %{name} -D %{buildroot}%{_gamesbindir}/%{name}
@@ -50,25 +50,10 @@ Name=Enemy Lines 4
 Comment=A simple futuristic racing game
 EOF
 
-%post
-%if %mdkversion < 200900
-%{update_menus}
-%endif
-%{update_icon_cache}
-
-%postun
-%if %mdkversion < 200900
-%{clean_menus}
-%endif
-%{clean_icon_cache}
-
-%clean 
-rm -rf %{buildroot} 
-
 %files 
-%defattr(-,root,root)
 %doc README
 %{_datadir}/%{name}
 %{_gamesbindir}/%{name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
+
