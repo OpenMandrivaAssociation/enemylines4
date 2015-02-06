@@ -1,7 +1,7 @@
 Name:		enemylines4
 Summary:	A simple futuristic racing game
 Version:	1.0
-Release:	10
+Release:	11
 Group:		Games/Arcade
 License:	GPL+
 URL:		http://proj.phk.at/el/4/
