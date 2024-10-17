@@ -4,7 +4,7 @@ Version:	1.0
 Release:	11
 Group:		Games/Arcade
 License:	GPL+
-URL:		http://proj.phk.at/el/4/
+URL:		https://proj.phk.at/el/4/
 Source0:	http://proj.phk.at/el/4/%{name}-%{version}.tar.bz2
 Source10:	%{name}.png
 # include assert.h in track.cc to fix build failure - AdamW 2008/02
