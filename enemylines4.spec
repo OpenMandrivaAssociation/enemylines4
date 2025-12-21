@@ -10,6 +10,7 @@ Source10:	%{name}.png
 # include assert.h in track.cc to fix build failure - AdamW 2008/02
 Patch0:		enemylines4-assert.patch
 Patch1:		enemylines4-1.0-mdv-fix-gcc-4.3.patch
+BuildRequires:	make
 BuildRequires:	pkgconfig(sdl)
 BuildRequires:	pkgconfig(SDL_image)
 BuildRequires:	pkgconfig(glut)
